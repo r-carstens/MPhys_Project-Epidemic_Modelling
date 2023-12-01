@@ -69,11 +69,6 @@ for i in range(len(t_range) - 1):
     # Determining the current death rate
     mu_D_i = compartments.death_rates[i]
 
-    # Determining the current death rate (which will be applied on the next step)
-    check_for_shock = int(np.random.uniform() < (kappa * dt))
-    dp_death_rate = dt * (lam * np.random.normal() - nu * (mu_D_i - mu_D_star)) \
-                    + check_for_shock * omega
-
     # Determining the change in the susceptible compartment
     dS_i = dt * (- beta * S_i * I_i  # infection process (fully susceptible)
                  + mu_B * N_i * (1 - (N_i / N_star))  # birth process
@@ -89,6 +84,11 @@ for i in range(len(t_range) - 1):
     dM_i = dt * (-sigma * beta * M_i * I_i  # infection process (partially immune)
                  + gamma * I_i  # recovery process
                  - mu_D_i * M_i)  # natural death process
+
+    # Determining the change in the current death rate
+    check_for_shock = int(np.random.uniform() < (kappa * dt))
+    dp_death_rate = dt * (lam * np.random.normal() - nu * (mu_D_i - mu_D_star)) \
+                    + check_for_shock * omega
 
     # Determining the number of new deaths
     dDeaths = dt * (mu_D_i * N_i)
@@ -117,7 +117,7 @@ for i in range(len(t_range) - 1):
     compartments.death_rates[i + 1] = min(max(mu_D_i + dp_death_rate, 0), max(1, omega))
 
 
-# PLOTTING RESULTS
+########## PLOTTING RESULTS
 plt.clf()
 plt.title('Evolution of compartment sizes over time for SIM compartmental model \nwith one variant')
 plt.xlabel('Time')
@@ -134,6 +134,3 @@ plt.xlabel('Time')
 plt.ylabel('Death Rate')
 plt.plot(t_range, compartments.death_rates)
 plt.savefig('SIM_DeathRates.png')
-
-
-
