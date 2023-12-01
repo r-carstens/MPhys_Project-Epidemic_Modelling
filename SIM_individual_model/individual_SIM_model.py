@@ -294,11 +294,11 @@ plt.title('Evolution of compartment sizes over time for an individual-based mode
 plt.xlabel('Time (days)')
 plt.ylabel('Compartment Size')
 plt.legend()
-plt.savefig('individual_model_CompartmentalData.png')
+plt.savefig('individual_SIM_CompartmentalData.png')
 
 # Drawing the family tree
 plt.clf()
 plt.figure()
 pos = nx.spring_layout(G)
 nx.draw(infection_tree, pos, with_labels=True, arrowsize=10)
-plt.savefig('individual_model_InfectionTree.png')
+plt.savefig('individual_SIM_InfectionTree.png')
