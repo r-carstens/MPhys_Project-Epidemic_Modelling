@@ -9,7 +9,7 @@ where $a$ is the rate at which a single human is bitten by the mosquitoes, $b$ i
 
 The Gillespie algorithm was used to simulate the dynamics within the network, allowing for increased computational efficiency and a stochastic simulation. The simulation was run until convergence - meaning all individuals recovered - or until the maximum simulation time was reached. During each iteration of the simulation, the following algorithm was completed:
 * Initialise the network with the initial conditions for $S_0$, $I_0$, and $M_0$.
-* Determine each possible event $X_i$. The possible events include an infected node recovering, or a susceptible node becoming infected. Therefore, for a given susceptible node, all infected neighbours - and the transmission probabilities along the edges - were determined.
+* Determine each possible event $X_i$. The possible events include an infected node recovering, or a susceptible node becoming infected. Therefore, for a given susceptible node, all infected neighbours - and the transmission probabilities along the edges - are required.
 * Calculate each event rate $a_i$. The rates may change and so must be recalculated each iteration.
 * Calculate the sum of the rates $a = \sum_{i=1}a_i$.
 * Determine the duration of the event by selecting a time step $dt$ from $dt = \frac{1}{a}log(\frac{1}{r1})$, where $r1$ is drawn from a uniform distribution.
