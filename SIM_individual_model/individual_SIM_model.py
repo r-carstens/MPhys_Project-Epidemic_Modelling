@@ -5,9 +5,8 @@ import matplotlib.pyplot as plt
 ################################################## SIMULATION CONSTANTS
 
 gamma = 1 / 14  # human recovery time
-beta = 0.5  # transmission rate of malaria
-mu = 1 / 14  # exposure period
-sigma = 0  # immunity breakthrough rate
+mu = 1 / 14     # exposure period
+sigma = 0       # immunity breakthrough rate
 
 ################################################## STATES
 
@@ -197,9 +196,9 @@ def run_gillespie(G, S0, I0, R0, t_max):
         G = update_network(G, event_source, event_target)
 
         # Saving the results
-        S_data.append(np.sum([G.nodes()[node]['state'] == 'S' for node in G.nodes()]))
-        I_data.append(np.sum([G.nodes()[node]['state'] == 'I' for node in G.nodes()]))
-        R_data.append(np.sum([G.nodes()[node]['state'] == 'R' for node in G.nodes()]))
+        S_data.append(np.sum([G.nodes()[node]['state'] == susceptible for node in G.nodes()]))
+        I_data.append(np.sum([G.nodes()[node]['state'] == infected for node in G.nodes()]))
+        R_data.append(np.sum([G.nodes()[node]['state'] == recovered for node in G.nodes()]))
         t_data.append(t)
 
     return G, S_data, I_data, R_data, t_data
