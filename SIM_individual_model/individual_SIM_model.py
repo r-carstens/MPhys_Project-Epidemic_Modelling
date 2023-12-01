@@ -296,7 +296,7 @@ plt.ylabel('Compartment Size')
 plt.legend()
 plt.savefig('individual_SIM_CompartmentalData.png')
 
-# Drawing the family tree
+# Drawing the infection tree
 plt.clf()
 plt.figure()
 pos = nx.spring_layout(G)
