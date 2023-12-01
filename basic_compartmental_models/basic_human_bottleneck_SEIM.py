@@ -127,7 +127,7 @@ for i in range(len(t_range) - 1):
     compartments.death_rates[i + 1] = min(max(mu_D_i + dp_death_rate, 0), max(1, omega))
 
 
-# PLOTTING RESULTS
+########## PLOTTING RESULTS
 plt.clf()
 plt.title('Evolution of compartment sizes over time for SEIM compartmental model \nwith one variant')
 plt.xlabel('Time')
@@ -145,6 +145,3 @@ plt.xlabel('Time')
 plt.ylabel('Death Rate')
 plt.plot(t_range, compartments.death_rates)
 plt.savefig('SEIM_DeathRates.png')
-
-
-
