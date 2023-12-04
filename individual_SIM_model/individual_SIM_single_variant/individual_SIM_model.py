@@ -293,11 +293,11 @@ plt.title('Evolution of population sizes over time for an individual-based model
 plt.xlabel('Time (days)')
 plt.ylabel('Population Size')
 plt.legend()
-plt.savefig('individual_SIM_PopulationData.png')
+plt.savefig('individual_SIM_results.png')
 
 # Drawing the infection tree
 plt.clf()
 plt.figure()
 pos = nx.spring_layout(G)
 nx.draw(infection_tree, pos, with_labels=True, arrowsize=10)
-plt.savefig('individual_SIM_InfectionTree.png')
+plt.savefig('individual_SIM_infectionTree.png')
