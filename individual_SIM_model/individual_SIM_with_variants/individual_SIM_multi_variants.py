@@ -199,7 +199,7 @@ def get_current_totals(G, num_variants):
 def run_gillespie(G, num_variants, t_max):
     
     # Creating file to store data
-    out_file = open('individual_SIM_data.txt', 'w')
+    out_file = open('individual_SIM_variants_data.txt', 'w')
     out_file.write('Time,' + ','.join([f'S_{variant},I_{variant},R_{variant}' for variant in range(num_variants)]) + '\n')
     
     # Setting initial conditions
