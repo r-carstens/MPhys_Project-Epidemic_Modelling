@@ -205,11 +205,11 @@ plt.title('Evolution of compartment sizes over time for SIM compartmental model 
 plt.xlabel('Time')
 plt.ylabel('Total')
 plt.legend()
-plt.savefig('multiVariants_SIM_CompartmentalData.png')
+plt.show()
 
 plt.clf()
 plt.title('Evolution of death rates over time for SIM compartmental model \nwith two variants')
 plt.xlabel('Time')
 plt.ylabel('Death Rate')
 plt.plot(multiple_variants.t_range, multiple_variants.death_rates)
-plt.savefig('multiVariants_SIM_DeathRates.png')
+plt.show()
