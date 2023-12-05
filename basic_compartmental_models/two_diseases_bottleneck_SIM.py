@@ -16,12 +16,12 @@ kappa = 0.01      # shock frequency
 
 ########## EPIDEMIOLOGICAL DYNAMICS
 
-# Variant 1
+# Disease 1
 beta_1 = 3        # infection rate
 gamma_1 = 0.4     # recovery (to partial immunity)
 sigma_1 = 0.6     # "breakthrough" rate of partial immunity (between 0 and 1)
 
-# Variant 2
+# Disease 2
 beta_2 = 2.5      # infection rate
 gamma_2 = 0.5     # recovery (to partial immunity)
 sigma_2 = 0.8     # "breakthrough" rate of partial immunity (between 0 and 1)
@@ -83,10 +83,10 @@ class Compartments:
         # Determining the current death rate
         mu_D_i = self.death_rates[i]
 
-        # Updating the S1S2 compartment (susceptible to both variants)
+        # Updating the S1S2 compartment (susceptible to both diseases)
         dS1S2_i = self.dt * (mu_B * N_i * (1 - N_i / N_star)                   # birth (assumes total susceptibility)
-                             - beta_1 * S1S2 * (I1S2 + I1I2 + I1M2)            # infection by variant 1
-                             - beta_2 * S1S2 * (S1I2 + I1I2 + M1I2)            # infection by variant 2
+                             - beta_1 * S1S2 * (I1S2 + I1I2 + I1M2)            # infection by disease 1
+                             - beta_2 * S1S2 * (S1I2 + I1I2 + M1I2)            # infection by disease 2
                              - mu_D_i * S1S2)                                  # death
 
         # Updating the I1S2 compartment (infected by 1, susceptible to 2)
@@ -187,29 +187,29 @@ t_max = 250
 dt = 0.2
 
 ########## RUNNING SIMULATION
-multiple_variants = Compartments(initial_conditions, mu_D_star, t_max, dt)
-multiple_variants.run_sim()
+multiple_diseases = Compartments(initial_conditions, mu_D_star, t_max, dt)
+multiple_diseases.run_sim()
 
 ########## PLOTTING RESULTS
 plt.clf()
-plt.plot(multiple_variants.t_range, multiple_variants.S1S2_data, label='S1S1')  # susceptible to both variant 1 and 2
-plt.plot(multiple_variants.t_range, multiple_variants.I1S2_data, label='I1S2')  # infected by 1, susceptible to 2
-plt.plot(multiple_variants.t_range, multiple_variants.M1S2_data, label='M1S2')  # immune to 1, susceptible to 2
-plt.plot(multiple_variants.t_range, multiple_variants.S1I2_data, label='S1I2')  # susceptible to 1, infected by 2
-plt.plot(multiple_variants.t_range, multiple_variants.I1I2_data, label='I1I2')  # immune to both variant 1 and 2
-plt.plot(multiple_variants.t_range, multiple_variants.M1I2_data, label='M1I2')  # immune to 1, infected by 2
-plt.plot(multiple_variants.t_range, multiple_variants.S1M2_data, label='S1M2')  # susceptible to 1, immune to 2
-plt.plot(multiple_variants.t_range, multiple_variants.I1M2_data, label='I1M2')  # infected by 1, immune to 2
-plt.plot(multiple_variants.t_range, multiple_variants.M1M2_data, label='M1M2')  # immune to both variant 1 and 2
-plt.title('Evolution of compartment sizes over time for SIM compartmental model \nwith two variants')
+plt.plot(multiple_diseases.t_range, multiple_diseases.S1S2_data, label='S1S1')  # susceptible to both disease 1 and 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.I1S2_data, label='I1S2')  # infected by 1, susceptible to 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.M1S2_data, label='M1S2')  # immune to 1, susceptible to 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.S1I2_data, label='S1I2')  # susceptible to 1, infected by 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.I1I2_data, label='I1I2')  # immune to both disease 1 and 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.M1I2_data, label='M1I2')  # immune to 1, infected by 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.S1M2_data, label='S1M2')  # susceptible to 1, immune to 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.I1M2_data, label='I1M2')  # infected by 1, immune to 2
+plt.plot(multiple_diseases.t_range, multiple_diseases.M1M2_data, label='M1M2')  # immune to both disease 1 and 2
+plt.title('Evolution of compartment sizes over time for SIM compartmental model \nwith two diseases')
 plt.xlabel('Time')
 plt.ylabel('Total')
 plt.legend()
 plt.show()
 
 plt.clf()
-plt.title('Evolution of death rates over time for SIM compartmental model \nwith two variants')
+plt.title('Evolution of death rates over time for SIM compartmental model \nwith two diseases')
 plt.xlabel('Time')
 plt.ylabel('Death Rate')
-plt.plot(multiple_variants.t_range, multiple_variants.death_rates)
+plt.plot(multiple_diseases.t_range, multiple_diseases.death_rates)
 plt.show()
