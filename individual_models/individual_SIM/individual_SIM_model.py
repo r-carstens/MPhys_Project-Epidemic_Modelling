@@ -196,10 +196,10 @@ def get_current_totals(G, num_diseases):
     return current_data.reshape(num_diseases * 3)
                                  
                                    
-def run_gillespie(G, num_diseases, t_max):
+def run_gillespie(G, num_diseases, t_max, file_name):
     
     # Creating file to store data
-    out_file = open('individual_SIM_diseases_data.txt', 'w')
+    out_file = open(file_name, 'w')
     out_file.write('Time,' + ','.join([f'S_{disease},I_{disease},R_{disease}' for disease in range(num_diseases)]) + '\n')
     
     # Setting initial conditions
@@ -244,20 +244,27 @@ I0, R0 = 1, 0
 S0 = N - I0 - R0
 t_max = 100
 
+# Creating file to store data
+file_name = 'individual_SIM_%s_diseases_data.txt' % num_diseases if num_diseases > 1 else 'individual_SIM_disease_data.txt'
+
 # Creating the graph and running the simulation
 G = initialise_graph(N, num_diseases)
-G = run_gillespie(G, num_diseases, t_max)
+G = run_gillespie(G, num_diseases, t_max, file_name)
 
 # Reading the data
-data = pd.read_csv('individual_SIM_diseases_data.txt')
+data = pd.read_csv(file_name)
 data.columns
 
 # Plotting the data
 for i in range(1, len(data.columns)):
     plt.plot(data[data.columns[0]], data[data.columns[i]], label=data.columns[i])
     
-plt.legend()
-plt.title('Evolution of population sizes over time for an individual-based model \nwith %s diseases' % num_diseases)
+if num_diseases > 1:
+    plt.title('Evolution of population sizes over time for an individual-based model \nwith %s diseases' % num_diseases)
+    
+else:
+    plt.title('Evolution of population sizes over time for an individual-based model \nwith %s disease' % num_diseases)
+    
 plt.xlabel('Time (days)')
 plt.ylabel('Population Size')
 plt.legend()
