@@ -8,7 +8,7 @@ N_star = 1.0      # carrying capacity of system
 
 ########## EPIDEMIOLOGY DYNAMICS
 
-# Variant 1
+# Disease 1
 beta = 3          # infection rate
 gamma = 1/14      # recovery (to partial immunity)
 a = 1/10          # incubation period
@@ -129,7 +129,7 @@ for i in range(len(t_range) - 1):
 
 ########## PLOTTING RESULTS
 plt.clf()
-plt.title('Evolution of compartment sizes over time for SEIM compartmental model \nwith one variant')
+plt.title('Evolution of compartment sizes over time for SEIM compartmental model \nwith one disease')
 plt.xlabel('Time')
 plt.ylabel('Total')
 plt.plot(t_range, compartments.S_data, label='Susceptible')
@@ -137,11 +137,11 @@ plt.plot(t_range, compartments.E_data, label='Exposed')
 plt.plot(t_range, compartments.I_data, label='Infected')
 plt.plot(t_range, compartments.M_data, label='Immune')
 plt.legend()
-plt.savefig('SEIM_CompartmentalData.png')
+plt.show()
 
 plt.clf()
-plt.title('Evolution of death rates over time for SEIM compartmental model \nwith one variant')
+plt.title('Evolution of death rates over time for SEIM compartmental model \nwith one disease')
 plt.xlabel('Time')
 plt.ylabel('Death Rate')
 plt.plot(t_range, compartments.death_rates)
-plt.savefig('SEIM_DeathRates.png')
+plt.show()
